@@ -40,6 +40,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/episodes/**").authenticated()
                         // apenas ADMIN pode acessar /api/users
                         .requestMatchers("/api/users/**").hasRole("ADMIN")
+                        // apenas ADMIN pode sincronizar dados externos
+                        .requestMatchers(HttpMethod.POST, "/api/tvmaze/sync/**").hasRole("ADMIN")
                         // outras requisicoes precisam estar autenticadas
                         .anyRequest().authenticated()
                 )

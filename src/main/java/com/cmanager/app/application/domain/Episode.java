@@ -1,6 +1,8 @@
 package com.cmanager.app.application.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,14 +10,16 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "episode")
+@Getter
+@Setter
 public class Episode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_integration", nullable = false)
-    private Integer idIntegration;
+    @Column(name = "ID_INTEGRATION", nullable = false, unique = true)
+    private String idIntegration;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_show", nullable = false)
