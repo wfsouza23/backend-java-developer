@@ -31,7 +31,16 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // libera login sem token
                         .requestMatchers("/api/auth/login").permitAll()
+                        // apenas ADMIN pode criar shows
+                        .requestMatchers(HttpMethod.POST, "/api/shows/**").hasRole("ADMIN")
+                        // usuários autenticados podem listar shows e episódios
+                        .requestMatchers(HttpMethod.GET, "/api/shows/**").authenticated()
+                        .requestMatchers("/api/episodes/**").authenticated()
+                        // apenas ADMIN pode acessar /api/users
+                        .requestMatchers("/api/users/**").hasRole("ADMIN")
+                        // outras requisicoes precisam estar autenticadas
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(daoAuthProvider)
