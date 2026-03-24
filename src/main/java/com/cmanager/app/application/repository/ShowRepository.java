@@ -1,8 +1,16 @@
 package com.cmanager.app.application.repository;
 
 import com.cmanager.app.application.domain.Show;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface ShowRepository extends JpaRepository<Show, String> {
-    // consultas adicionais podem ser adicionadas aqui
+
+    //busca com filtro por nome e paginado
+    Page<Show> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+    Optional<Show> findByIdIntegration(String idIntegration);
 }

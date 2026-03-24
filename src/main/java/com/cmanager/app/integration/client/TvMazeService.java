@@ -4,6 +4,7 @@ import com.cmanager.app.application.domain.Episode;
 import com.cmanager.app.application.domain.Show;
 import com.cmanager.app.application.repository.EpisodeRepository;
 import com.cmanager.app.application.repository.ShowRepository;
+import com.cmanager.app.integration.dto.ShowsResponseDTO;
 import com.cmanager.app.integration.dto.TvMazeEpisodeDTO;
 import com.cmanager.app.integration.dto.TvMazeShowDTO;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,11 @@ public class TvMazeService {
         this.episodeRepository = episodeRepository;
     }
 
-    public Show syncShow(String showName) {
-        // Buscar show como TvMazeShowDTO
-        String urlShow = "https://api.tvmaze.com/singlesearch/shows?q={name}";
+    public ShowsResponseDTO syncShow(String showName) {
+        // URL já trazendo episódios embutidos
+        String urlShow = "https://api.tvmaze.com/singlesearch/shows?q={name}&embed=episodes";
+
+        // DTO precisa refletir a estrutura com "_embedded"
         TvMazeShowDTO showDTO = restTemplate.getForObject(urlShow, TvMazeShowDTO.class, showName);
 
         if (showDTO == null) {
@@ -42,19 +45,16 @@ public class TvMazeService {
         show.setRuntime(showDTO.getRuntime());
         show.setAverageRuntime(showDTO.getAverageRuntime());
         show.setOfficialSite(showDTO.getOfficialSite());
-        show.setRating(showDTO.getRating().getAverage());
+        show.setRating(showDTO.getRating().average());
 
         if (!showRepository.existsById(show.getId())) {
             showRepository.save(show);
         }
 
-        // Buscar episódios
-        String urlEpisodes = "https://api.tvmaze.com/shows/{id}/episodes";
-        TvMazeEpisodeDTO[] episodesArray = restTemplate.getForObject(urlEpisodes, TvMazeEpisodeDTO[].class, showDTO.getId());
-
-        if (episodesArray != null) {
-            for (TvMazeEpisodeDTO epDTO : episodesArray) {
-                if (!episodeRepository.existsById(epDTO.getId())) {
+        // Agora os episódios vêm dentro de showDTO.getEmbedded().getEpisodes()
+        if (showDTO.get_embedded() != null && showDTO.get_embedded().getEpisodes() != null) {
+            for (TvMazeEpisodeDTO epDTO : showDTO.get_embedded().getEpisodes()) {
+                if (!episodeRepository.existsByIdIntegration(epDTO.getId().toString())) {
                     Episode ep = new Episode();
                     ep.setIdIntegration(epDTO.getId().toString());
                     ep.setName(epDTO.getName());
@@ -64,7 +64,7 @@ public class TvMazeService {
                     ep.setAirdate(epDTO.getAirdate());
                     ep.setAirtime(epDTO.getAirtime());
                     ep.setRuntime(epDTO.getRuntime());
-                    ep.setRating(epDTO.getRating().getAverage());
+                    ep.setRating(epDTO.getRating().average());
                     ep.setSummary(epDTO.getSummary());
 
                     ep.setShow(show);
@@ -74,7 +74,20 @@ public class TvMazeService {
             }
         }
 
-        return show;
+        // Agora retorna o DTO de resposta
+        return new ShowsResponseDTO(
+                showDTO.getId(),
+                showDTO.getName(),
+                showDTO.getType(),
+                showDTO.getLanguage(),
+                showDTO.getStatus(),
+                showDTO.getRuntime(),
+                showDTO.getAverageRuntime(),
+                showDTO.getOfficialSite(),
+                showDTO.getRating(),
+                showDTO.getSummary(),
+                new ShowsResponseDTO.Embedded(showDTO.get_embedded().getEpisodes())
+        );
     }
 
 }

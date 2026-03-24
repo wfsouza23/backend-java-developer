@@ -1,15 +1,21 @@
 package com.cmanager.app.application.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "SHOW")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Show {
 
     @Id
@@ -50,6 +56,10 @@ public class Show {
 
     @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMPTZ")
     private OffsetDateTime updatedAt;
+
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Episode> episodes = new ArrayList<>();
+
 
     @PrePersist
     public void prePersist() {

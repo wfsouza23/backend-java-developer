@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
+
 
 @Getter
 @Setter
@@ -20,14 +20,8 @@ public class TvMazeEpisodeDTO {
     private LocalDate airdate;
     private String airtime;
     private Integer runtime;
-    private Rating rating;
+    private RatingDTO rating;
     private String summary;
 
-
-    @Getter
-    @Setter
-    public static class Rating {
-        private BigDecimal average;
-    }
 }
 

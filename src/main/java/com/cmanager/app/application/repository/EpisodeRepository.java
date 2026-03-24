@@ -10,4 +10,5 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     List<Episode> findByShowId(String showId);
     List<Episode> findByShowIdAndSeason(String showId, Integer season);
     Optional<Episode> findByIdIntegration(String idIntegration);
+    boolean existsByIdIntegration(String idIntegration);
 }

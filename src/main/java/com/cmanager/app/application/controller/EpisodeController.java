@@ -43,7 +43,7 @@ public class EpisodeController {
 
     @PostMapping
     public ResponseEntity<EpisodeResponseDTO> createEpisode(@RequestBody EpisodeRequestDTO episodeRequest) {
-        URI location = URI.create("/api/episodes/" + episodeRequest.idIntegration());
+        URI location = URI.create("/api/episodes/integration/" + episodeRequest.idIntegration());
 
         return ResponseEntity.created(location).body(episodeService.save(episodeRequest));
     }

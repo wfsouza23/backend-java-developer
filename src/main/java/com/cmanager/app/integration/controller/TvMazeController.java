@@ -1,8 +1,12 @@
 package com.cmanager.app.integration.controller;
 
-import com.cmanager.app.application.domain.Show;
 import com.cmanager.app.integration.client.TvMazeService;
+import com.cmanager.app.integration.dto.ShowsResponseDTO;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/tvmaze")
@@ -15,7 +19,7 @@ public class TvMazeController {
     }
 
     @PostMapping("/sync/{showName}")
-    public Show syncShow(@PathVariable String showName) {
-        return tvMazeService.syncShow(showName);
+    public ResponseEntity<ShowsResponseDTO> syncShow(@PathVariable String showName) {
+        return ResponseEntity.ok(tvMazeService.syncShow(showName));
     }
 }

@@ -20,7 +20,6 @@ public record EpisodeAverageDTO(
 
         @JsonProperty("averageRating")
         @Schema(name = "averageRating", description = "Nota média de avaliação dos episodios")
-        @JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "#.#")
         Double averageRating
 
 ) {

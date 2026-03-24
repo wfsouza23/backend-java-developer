@@ -25,17 +25,11 @@ public class TvMazeShowDTO {
     private String premiered;
     private String ended;
     private String officialSite;
-    private Rating rating;
+    private RatingDTO rating;
     private Network network;
     private Image image;
     private String summary;
-
-    @Getter
-    @Setter
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Rating {
-        private BigDecimal average;
-    }
+    private EmbeddedDTO _embedded;
 
     @Getter
     @Setter
@@ -62,6 +56,13 @@ public class TvMazeShowDTO {
     public static class Image {
         private String medium;
         private String original;
+    }
+
+    @Getter
+    @Setter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class EmbeddedDTO {
+        private List<TvMazeEpisodeDTO> episodes;
     }
 }
 
