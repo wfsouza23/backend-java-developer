@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
-@Schema(name = "ShowsDTO", description = "Objeto da representação de Shows")
+@Schema(name = "EpisodeRequestDTO", description = "Objeto da representação de Episodios")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record EpisodeRequestDTO(
         @JsonProperty("id")

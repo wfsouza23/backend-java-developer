@@ -6,10 +6,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name = "ShowsDTO", description = "Objeto da representação de Shows")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record EpisodeDTO(
-        @JsonProperty("id")
-        @Schema(name = "id", description = "Id")
-        String id,
+public record EpisodeResponseDTO(
+        @JsonProperty("idIntegration")
+        @Schema(name = "idIntegration", description = "idIntegration")
+        String idIntegration,
         @JsonProperty("name")
         @Schema(name = "name", description = "Nome")
         String name,
