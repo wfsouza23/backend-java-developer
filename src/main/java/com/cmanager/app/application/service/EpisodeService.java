@@ -80,7 +80,9 @@ public class EpisodeService {
                 .average()
                 .orElse(0.0);
 
-        return new EpisodeAverageDTO(showId, season, avg);
+        double rounded = Math.round(avg * 100.0) / 100.0;
+
+        return new EpisodeAverageDTO(showId, season, rounded);
     }
 }
 
