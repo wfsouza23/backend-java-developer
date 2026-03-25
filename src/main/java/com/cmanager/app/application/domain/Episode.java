@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "episode")
@@ -19,7 +20,7 @@ public class Episode {
     private Long id;
 
     @Column(name = "ID_INTEGRATION", nullable = false, unique = true)
-    private String idIntegration;
+    private Integer idIntegration;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_show", nullable = false)
@@ -32,7 +33,7 @@ public class Episode {
 
     private LocalDate airdate;
     private String airtime;
-    private LocalDateTime airstamp;
+    private OffsetDateTime airstamp;
 
     private Integer runtime;
 

@@ -35,13 +35,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/login").permitAll()
                         // apenas ADMIN pode criar shows
                         .requestMatchers(HttpMethod.POST, "/api/shows/**").hasRole("ADMIN")
-                        // usuários autenticados podem listar shows e episódios
-                        .requestMatchers(HttpMethod.GET, "/api/shows/**").authenticated()
-                        .requestMatchers("/api/episodes/**").authenticated()
-                        // apenas ADMIN pode acessar /api/users
-                        .requestMatchers("/api/users/**").hasRole("ADMIN")
-                        // apenas ADMIN pode sincronizar dados externos
-                        .requestMatchers(HttpMethod.POST, "/api/tvmaze/sync/**").hasRole("ADMIN")
                         // outras requisicoes precisam estar autenticadas
                         .anyRequest().authenticated()
                 )

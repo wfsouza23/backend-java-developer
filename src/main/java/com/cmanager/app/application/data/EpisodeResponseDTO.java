@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public record EpisodeResponseDTO(
         @JsonProperty("idIntegration")
         @Schema(name = "idIntegration", description = "idIntegration")
-        String idIntegration,
+        Integer idIntegration,
         @JsonProperty("name")
         @Schema(name = "name", description = "Nome")
         String name,

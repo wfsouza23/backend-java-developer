@@ -25,26 +25,26 @@ public class EpisodeController {
         this.episodeService = episodeService;
     }
 
-    @GetMapping("/{showId}/episodes")
-    public ResponseEntity<List<EpisodeResponseDTO>> listEpisodes(@PathVariable String showId) {
-        return ResponseEntity.ok(episodeService.findByShow(showId));
-    }
-
-    @GetMapping("/integration/{idIntegration}")
-    public ResponseEntity<EpisodeResponseDTO> findEpisodes(@PathVariable String idIntegration) {
-        return ResponseEntity.ok(episodeService.findByEpisode(idIntegration));
-    }
-
-    @GetMapping("/{showId}/season/{season}/episodes/average-rating")
-    public ResponseEntity<EpisodeAverageDTO> averageRating(@PathVariable String showId, @PathVariable Integer season) {
-        EpisodeAverageDTO response = episodeService.averageRatingBySeason(showId, season);
-        return ResponseEntity.ok(response);
-    }
-
-    @PostMapping
-    public ResponseEntity<EpisodeResponseDTO> createEpisode(@RequestBody EpisodeRequestDTO episodeRequest) {
-        URI location = URI.create("/api/episodes/integration/" + episodeRequest.idIntegration());
-
-        return ResponseEntity.created(location).body(episodeService.save(episodeRequest));
-    }
+//    @GetMapping("/{showId}/episodes")
+//    public ResponseEntity<List<EpisodeResponseDTO>> listEpisodes(@PathVariable String showId) {
+//        return ResponseEntity.ok(episodeService.findByShow(showId));
+//    }
+//
+//    @GetMapping("/integration/{idIntegration}")
+//    public ResponseEntity<EpisodeResponseDTO> findEpisodes(@PathVariable String idIntegration) {
+//        return ResponseEntity.ok(episodeService.findByEpisode(idIntegration));
+//    }
+//
+//    @GetMapping("/{showId}/season/{season}/episodes/average-rating")
+//    public ResponseEntity<EpisodeAverageDTO> averageRating(@PathVariable String showId, @PathVariable Integer season) {
+//        EpisodeAverageDTO response = episodeService.averageRatingBySeason(showId, season);
+//        return ResponseEntity.ok(response);
+//    }
+//
+//    @PostMapping
+//    public ResponseEntity<EpisodeResponseDTO> createEpisode(@RequestBody EpisodeRequestDTO episodeRequest) {
+//        URI location = URI.create("/api/episodes/integration/" + episodeRequest.idIntegration());
+//
+//        return ResponseEntity.created(location).body(episodeService.save(episodeRequest));
+//    }
 }

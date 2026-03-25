@@ -10,7 +10,7 @@ public record ShowResponseDTO(
 
         @JsonProperty("idIntegration")
         @Schema(name = "idIntegration", description = "Id externo de integração do show")
-        String idIntegration,
+        Integer idIntegration,
 
         @JsonProperty("name")
         @Schema(name = "name", description = "Nome do show")

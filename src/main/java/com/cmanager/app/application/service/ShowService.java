@@ -61,7 +61,7 @@ public class ShowService {
         return showRepository.findById(id).orElse(null);
     }
 
-    public ShowResponseDTO findByShow(String idIntegration) {
+    public ShowResponseDTO findByShow(Integer idIntegration) {
         Show show = showRepository.findByIdIntegration(idIntegration)
                 .orElseThrow(() -> new IllegalArgumentException("Episódio não encontrado"));
 

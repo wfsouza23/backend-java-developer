@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.OptionalDouble;
 
@@ -35,7 +36,7 @@ public class EpisodeService {
         episode.setType(episodeRequestDTO.type());
         episode.setAirdate(episodeRequestDTO.airdate());
         episode.setAirtime(episodeRequestDTO.airtime());
-        episode.setAirstamp(episodeRequestDTO.airstamp());
+        //episode.setAirstamp(OffsetDateTime.parse(episodeRequestDTO.airstamp()));
         episode.setRuntime(episodeRequestDTO.runtime());
         episode.setRating(episodeRequestDTO.rating());
         episode.setSummary(episodeRequestDTO.summary());
@@ -57,22 +58,22 @@ public class EpisodeService {
         );
     }
 
-    public List<EpisodeResponseDTO> findByShow(String showId) {
-        List<Episode> episodes = episodeRepository.findByShowId(showId);
+    public List<EpisodeResponseDTO> findByShow(Integer showId) {
+        List<Episode> episodes = episodeRepository.findByShowIdIntegration(showId);
 
         return episodes.stream()
                 .map(EpisodeMapper::toDTO)
                 .toList();
     }
 
-    public EpisodeResponseDTO findByEpisode(String idIntegration) {
+    public EpisodeResponseDTO findByEpisode(Integer idIntegration) {
         Episode episode = episodeRepository.findByIdIntegration(idIntegration)
                 .orElseThrow(() -> new IllegalArgumentException("Episódio não encontrado"));
         return EpisodeMapper.toDTO(episode);
     }
 
-    public EpisodeAverageDTO averageRatingBySeason(String showId, Integer season) {
-        List<Episode> episodes = episodeRepository.findByShowIdAndSeason(showId, season);
+    public EpisodeAverageDTO averageRatingBySeason(Integer showId, Integer season) {
+        List<Episode> episodes = episodeRepository.findByShowIdIntegrationAndSeason(showId, season);
 
         double avg = episodes.stream()
                 .filter(e -> e.getRating() != null)

@@ -12,7 +12,7 @@ import java.util.List;
 public record ShowsResponseDTO(
         @JsonProperty("id")
         @Schema(name = "id", description = "Id")
-        Long id,
+        String id,
         @JsonProperty("name")
         @Schema(name = "name", description = "Nome")
         String name,
@@ -47,7 +47,7 @@ public record ShowsResponseDTO(
 ) {
 
         public record Embedded(
-            List<TvMazeEpisodeDTO> episodes
+            List<EpisodeResponseDTO> episodes
     ) {
     }
 }

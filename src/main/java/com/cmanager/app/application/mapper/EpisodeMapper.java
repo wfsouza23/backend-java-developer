@@ -9,7 +9,7 @@ public class EpisodeMapper {
 
     public static EpisodeResponseDTO toDTO(Episode episode) {
         return new EpisodeResponseDTO(
-                episode.getId().toString(),
+                episode.getIdIntegration(),
                 episode.getName(),
                 episode.getSeason(),
                 episode.getNumber()

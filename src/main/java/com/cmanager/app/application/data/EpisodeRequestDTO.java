@@ -14,7 +14,7 @@ public record EpisodeRequestDTO(
 
         @JsonProperty("idIntegration")
         @Schema(name = "idIntegration", description = "Id externo de integração do episódio")
-        String idIntegration,
+        Integer idIntegration,
 
         @JsonProperty("showId")
         @Schema(name = "showId", description = "Id do show ao qual o episódio pertence")

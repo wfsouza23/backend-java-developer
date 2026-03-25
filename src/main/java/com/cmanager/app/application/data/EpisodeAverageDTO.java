@@ -12,7 +12,7 @@ public record EpisodeAverageDTO(
 
         @JsonProperty("showId")
         @Schema(description = "Id do show")
-        String showId,
+        Integer showId,
 
         @JsonProperty("season")
         @Schema(description = "Número da temporada")
