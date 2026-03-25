@@ -6,9 +6,12 @@ import com.cmanager.app.application.mapper.EpisodeMapper;
 import com.cmanager.app.application.mapper.ShowMapper;
 import com.cmanager.app.application.repository.EpisodeRepository;
 import com.cmanager.app.application.repository.ShowRepository;
+import com.cmanager.app.core.exception.AlreadyExistsException;
 import com.cmanager.app.integration.dto.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ShowServiceIntegration {
@@ -33,6 +36,11 @@ public class ShowServiceIntegration {
 
     @Transactional
     public ShowsResponseDTO syncShow(String showName) {
+        Optional<Show> existing = showRepository.findByNameIgnoreCase(showName);
+        if (existing.isPresent()) {
+            throw new AlreadyExistsException("Show", showName);
+        }
+
         ShowsRequestDTO dto = requestService.getShow(showName);
 
         Show show = showRepository.findById(dto.id().toString())

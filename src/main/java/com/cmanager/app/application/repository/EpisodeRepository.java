@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     List<Episode> findByShowIdIntegration(Integer idIntegration);
     List<Episode> findByShowIdIntegrationAndSeason(Integer idIntegration, Integer season);
-    Optional<Episode> findByIdIntegration(Integer idIntegration);
-    boolean existsByIdIntegration(Integer idIntegration);
+    List<Episode> findByShow_IdIntegration(Integer showIdIntegration);
+
 }

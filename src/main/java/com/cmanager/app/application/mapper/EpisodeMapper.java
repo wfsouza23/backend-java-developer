@@ -1,5 +1,6 @@
 package com.cmanager.app.application.mapper;
 
+import com.cmanager.app.application.data.EpisodeDTO;
 import com.cmanager.app.application.domain.Episode;
 import com.cmanager.app.application.domain.Show;
 import com.cmanager.app.integration.dto.EpisodeRequestDTO;
@@ -7,6 +8,7 @@ import com.cmanager.app.integration.dto.EpisodeResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class EpisodeMapper {
@@ -49,5 +51,16 @@ public class EpisodeMapper {
                 new com.cmanager.app.integration.dto.RatingDTO(episode.getRating()),
                 episode.getSummary()
         );
+    }
+
+    public List<EpisodeDTO> toEpisodeDTO(List<Episode> episodes) {
+        return episodes.stream()
+                .map(e -> new EpisodeDTO(
+                        e.getId().toString(),
+                        e.getName(),
+                        e.getSeason(),
+                        e.getNumber()
+                ))
+                .toList();
     }
 }

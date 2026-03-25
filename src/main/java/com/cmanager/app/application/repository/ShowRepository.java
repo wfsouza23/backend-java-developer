@@ -14,4 +14,6 @@ public interface ShowRepository extends JpaRepository<Show, String> {
 
     Optional<Show> findByIdIntegration(Integer idIntegration);
 
+    Optional<Show> findByNameIgnoreCase(String showName);
+
 }

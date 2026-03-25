@@ -27,4 +27,13 @@ public class OpenApiConfig {
                                 .scheme("bearer")
                                 .bearerFormat("JWT")));
     }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("FINCH - Backend API")
+                        .version("1.0")
+                        .description("APIs para sincronização de shows e episódios com Plataforma TvMaze"));
+    }
 }

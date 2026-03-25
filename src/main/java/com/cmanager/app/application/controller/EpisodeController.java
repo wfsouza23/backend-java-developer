@@ -1,12 +1,15 @@
 package com.cmanager.app.application.controller;
 
 import com.cmanager.app.application.data.EpisodeAverageDTO;
+import com.cmanager.app.application.data.EpisodeDTO;
 import com.cmanager.app.application.service.EpisodeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/episodes")
@@ -22,6 +25,11 @@ public class EpisodeController {
     public ResponseEntity<EpisodeAverageDTO> averageRating(@PathVariable Integer showId, @PathVariable Integer season) {
         EpisodeAverageDTO response = episodeService.averageRatingBySeason(showId, season);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/show/{showId}")
+    public ResponseEntity<List<EpisodeDTO>> getEpisodesByShow(@PathVariable Integer showId) {
+        return ResponseEntity.ok(episodeService.findByShow(showId));
     }
 
 }

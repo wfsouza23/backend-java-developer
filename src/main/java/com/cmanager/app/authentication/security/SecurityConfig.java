@@ -33,9 +33,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // libera login sem token
                         .requestMatchers("/api/auth/login").permitAll()
-                        // apenas ADMIN pode criar shows
                         .requestMatchers(HttpMethod.POST, "/api/shows/**").hasRole("ADMIN")
-                        // outras requisicoes precisam estar autenticadas
+                        .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(daoAuthProvider)
