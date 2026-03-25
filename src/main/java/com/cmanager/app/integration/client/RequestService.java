@@ -20,4 +20,5 @@ public class RequestService {
         return abstractConnect.getShow(url, new ParameterizedTypeReference<>() {
         });
     }
+
 }
