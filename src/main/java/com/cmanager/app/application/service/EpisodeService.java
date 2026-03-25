@@ -2,7 +2,6 @@ package com.cmanager.app.application.service;
 
 import com.cmanager.app.application.data.EpisodeAverageDTO;
 import com.cmanager.app.application.data.EpisodeDTO;
-import com.cmanager.app.application.domain.Episode;
 import com.cmanager.app.application.mapper.EpisodeMapper;
 import com.cmanager.app.application.repository.EpisodeRepository;
 import lombok.RequiredArgsConstructor;

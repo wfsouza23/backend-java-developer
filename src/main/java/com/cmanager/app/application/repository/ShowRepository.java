@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public interface ShowRepository extends JpaRepository<Show, String> {
 
-    //busca com filtro por nome e paginado
     Page<Show> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
     Optional<Show> findByIdIntegration(Integer idIntegration);

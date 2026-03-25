@@ -1,4 +1,4 @@
--- Reverter coluna id_integration de VARCHAR(36) para INTEGER em SHOW
+-- Revertendo coluna id_integration de VARCHAR(36) para INTEGER em SHOW
 ALTER TABLE show
 DROP CONSTRAINT IF EXISTS show_id_integration_unique;
 
@@ -11,7 +11,7 @@ ALTER TABLE show
 ALTER TABLE show
     ADD CONSTRAINT show_id_integration_unique UNIQUE (id_integration);
 
--- Reverter coluna id_integration de VARCHAR(36) para INTEGER em EPISODE
+-- Revertendo coluna id_integration de VARCHAR(36) para INTEGER em EPISODE
 ALTER TABLE episode
 DROP CONSTRAINT IF EXISTS episode_id_integration_unique;
 
