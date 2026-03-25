@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "episode")
+@Table(name = "EPISODE")
 @Getter
 @Setter
 public class Episode {

@@ -21,4 +21,3 @@ public record ShowDTO(
         return new ShowDTO(entity.getId(), entity.getName());
     }
 }
-
