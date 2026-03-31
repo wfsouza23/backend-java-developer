@@ -7,6 +7,7 @@ import com.cmanager.app.integration.dto.ShowsResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/shows")
+@RequiredArgsConstructor
 @Tag(
         name = "ShowController",
         description = "API de sincronização de SHOWs e busca por Nome"
@@ -30,11 +32,6 @@ public class ShowController {
     private final ShowService showService;
 
     private final ShowServiceIntegration showServiceIntegration;
-
-    public ShowController(ShowService showService, ShowServiceIntegration showServiceIntegration) {
-        this.showService = showService;
-        this.showServiceIntegration = showServiceIntegration;
-    }
 
     @Operation(
             summary = "get",

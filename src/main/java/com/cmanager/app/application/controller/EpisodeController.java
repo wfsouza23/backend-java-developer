@@ -6,6 +6,8 @@ import com.cmanager.app.application.service.EpisodeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/episodes")
+@RequiredArgsConstructor
 @Tag(
         name = "EpisodeController",
         description = "APIs de busca de episodios"
@@ -23,10 +26,6 @@ import java.util.List;
 public class EpisodeController {
 
     private final EpisodeService episodeService;
-
-    public EpisodeController(EpisodeService episodeService) {
-        this.episodeService = episodeService;
-    }
 
     @Operation(
             summary = "get",
