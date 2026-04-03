@@ -4,6 +4,7 @@ import com.cmanager.app.application.data.EpisodeAverageDTO;
 import com.cmanager.app.application.data.EpisodeDTO;
 import com.cmanager.app.application.mapper.EpisodeMapper;
 import com.cmanager.app.application.repository.EpisodeRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+
 public class EpisodeService {
 
     private final EpisodeRepository episodeRepository;
